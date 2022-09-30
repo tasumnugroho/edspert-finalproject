@@ -1,4 +1,6 @@
 import 'package:edspert_finalproject/view/login_page.dart';
+import 'package:edspert_finalproject/view/main_page.dart';
+import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:edspert_finalproject/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const SplashScreen(),
         LoginPage.route: (context) => const LoginPage(),
+        RegisterPage.route: (context) => const RegisterPage(),
+        MainPage.route: (context) => const MainPage(),
       },
     );
   }
