@@ -1,8 +1,10 @@
 import 'package:edspert_finalproject/view/login_page.dart';
+import 'package:edspert_finalproject/view/main/latihan_soal/mapel_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:edspert_finalproject/view/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -35,6 +38,7 @@ class MyApp extends StatelessWidget {
         LoginPage.route: (context) => const LoginPage(),
         RegisterPage.route: (context) => const RegisterPage(),
         MainPage.route: (context) => const MainPage(),
+        MapelPage.route: (context) => const MapelPage(),
       },
     );
   }
