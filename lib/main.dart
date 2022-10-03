@@ -1,5 +1,7 @@
+import 'package:edspert_finalproject/constants/r.dart';
 import 'package:edspert_finalproject/view/login_page.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/mapel_page.dart';
+import 'package:edspert_finalproject/view/main/latihan_soal/paket_soal_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:edspert_finalproject/view/splash_screen.dart';
@@ -17,9 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Latihan Soal',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
+        appBarTheme: AppBarTheme(backgroundColor: R.colors.primary),
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -39,6 +42,7 @@ class MyApp extends StatelessWidget {
         RegisterPage.route: (context) => const RegisterPage(),
         MainPage.route: (context) => const MainPage(),
         MapelPage.route: (context) => const MapelPage(),
+        PaketSoalPage.route: (context) => const PaketSoalPage(),
       },
     );
   }
