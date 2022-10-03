@@ -120,11 +120,11 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: Column(
                         children: [
-                          // Image.asset(
-                          //   R.assets.icHome,
-                          //   height: 20,
-                          // ),
-                          Icon(Icons.person),
+                          Image.asset(
+                            R.assets.icProfile,
+                            height: 25,
+                          ),
+                          // Icon(Icons.person),
                           Text("Profile"),
                         ],
                       ),
