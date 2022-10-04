@@ -5,10 +5,15 @@ import 'package:edspert_finalproject/view/main/latihan_soal/paket_soal_page.dart
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:edspert_finalproject/view/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   runApp(const MyApp());
 }
 
