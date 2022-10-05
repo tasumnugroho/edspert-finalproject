@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:edspert_finalproject/constants/r.dart';
+import 'package:edspert_finalproject/constants/repository/auth_api.dart';
+import 'package:edspert_finalproject/models/user_by_email.dart';
+import 'package:edspert_finalproject/view/main/latihan_soal/home_page.dart';
+import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -89,7 +93,15 @@ class _LoginPageState extends State<LoginPage> {
                 await signInWithGoogle();
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
-                  Navigator.of(context).pushNamed(RegisterPage.route);
+                  final dataUser = await AuthApi().getUserByEmail(user.email);
+                  if (dataUser != null) {
+                    final data = UserByEmail.fromJson(dataUser);
+                    if (data.status == 1) {
+                      Navigator.of(context).pushNamed(MainPage.route);
+                    } else {
+                      Navigator.of(context).pushNamed(RegisterPage.route);
+                    }
+                  }
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

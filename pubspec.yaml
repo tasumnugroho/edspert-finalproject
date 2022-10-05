@@ -29,6 +29,7 @@ environment:
 dependencies:
   cloud_firestore: ^3.5.0
   cupertino_icons: ^1.0.2
+  dio: ^4.0.6
   firebase_auth: ^3.11.0
   firebase_core: ^1.24.0
   flutter:
@@ -36,6 +37,7 @@ dependencies:
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.2
   intl: ^0.17.0
+  # network: ^0.10.0+1
   shared_preferences: ^2.0.15
 
 dev_dependencies:
