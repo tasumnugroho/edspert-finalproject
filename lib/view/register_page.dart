@@ -1,4 +1,5 @@
 import 'package:edspert_finalproject/constants/r.dart';
+import 'package:edspert_finalproject/helpers/preference_helper.dart';
 import 'package:edspert_finalproject/helpers/user_email.dart';
 import 'package:edspert_finalproject/models/network_response.dart';
 import 'package:edspert_finalproject/models/user_by_email.dart';
@@ -93,6 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (result.status == Status.success) {
                 final registerResult = UserByEmail.fromJson(result.data!);
                 if (registerResult.status == 1) {
+                  await PreferenceHelper().setUserData(registerResult.data!);
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       MainPage.route, (context) => false);
                 } else {
