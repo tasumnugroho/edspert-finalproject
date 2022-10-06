@@ -1,4 +1,8 @@
 import 'package:edspert_finalproject/constants/r.dart';
+import 'package:edspert_finalproject/helpers/user_email.dart';
+import 'package:edspert_finalproject/models/network_response.dart';
+import 'package:edspert_finalproject/models/user_by_email.dart';
+import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/view/login_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +18,13 @@ class RegisterPage extends StatefulWidget {
 enum Gender { lakilaki, perempuan }
 
 class _RegisterPageState extends State<RegisterPage> {
-  String gender = "Laki-laki";
   List<String> classSlta = ["10", "11", "12"];
-  String selectedClass = "10";
 
+  String gender = "Laki-laki";
+  String selectedClass = "10";
   final emailController = TextEditingController();
+  final schoolNameController = TextEditingController();
+  final fullNameController = TextEditingController();
 
   OnTapGender(Gender genderInput) {
     if (genderInput == Gender.lakilaki) {
@@ -27,6 +33,19 @@ class _RegisterPageState extends State<RegisterPage> {
       gender = "Perempuan";
     }
     setState(() {});
+  }
+
+  initDataUser() {
+    emailController.text = UserEmail.getUserEmail()!;
+    fullNameController.text = UserEmail.getUserDisplayName()!;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initDataUser();
   }
 
   @override
@@ -59,10 +78,37 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 20.0),
           child: ButtonLogin(
-            onTap: () {
-              print(emailController.text);
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(MainPage.route, (context) => false);
+            onTap: () async {
+              final json = {
+                "email": emailController.text,
+                "nama_lengkap": fullNameController.text,
+                "nama_sekolah": schoolNameController.text,
+                "kelas": selectedClass,
+                "gender": gender,
+                "foto": UserEmail.getUserPhotoUrl(),
+              };
+              print(json);
+
+              final result = await AuthApi().postRegister(json);
+              if (result.status == Status.success) {
+                final registerResult = UserByEmail.fromJson(result.data!);
+                if (registerResult.status == 1) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      MainPage.route, (context) => false);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(registerResult.message!),
+                    ),
+                  );
+                }
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Terjadi kesalahan, silahkan ulangi kembali"),
+                  ),
+                );
+              }
             },
             backgroundColor: R.colors.primary,
             borderColor: R.colors.primary,
@@ -87,11 +133,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: emailController,
                 title: 'Email',
                 hintText: 'Email Anda',
+                enabled: false,
               ),
               SizedBox(height: 5),
               RegisterTextField(
                 title: 'Nama Lengkap',
                 hintText: 'Nama Lengkap Anda',
+                controller: fullNameController,
               ),
               SizedBox(height: 5),
               Text(
@@ -211,6 +259,7 @@ class _RegisterPageState extends State<RegisterPage> {
               RegisterTextField(
                 title: 'Nama Sekolah',
                 hintText: 'Nama Sekolah',
+                controller: schoolNameController,
               ),
               // Spacer(),
             ],
@@ -227,10 +276,12 @@ class RegisterTextField extends StatelessWidget {
     required this.title,
     required this.hintText,
     this.controller,
+    this.enabled = true,
   }) : super(key: key);
 
   final String title;
   final String hintText;
+  final bool enabled;
   final TextEditingController? controller;
 
   @override
@@ -256,6 +307,7 @@ class RegisterTextField extends StatelessWidget {
             ),
           ),
           child: TextField(
+            enabled: enabled,
             controller: controller,
             decoration: InputDecoration(
                 border: InputBorder.none,

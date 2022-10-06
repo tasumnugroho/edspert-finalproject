@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:edspert_finalproject/constants/r.dart';
-import 'package:edspert_finalproject/constants/repository/auth_api.dart';
+import 'package:edspert_finalproject/models/network_response.dart';
+import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/models/user_by_email.dart';
+import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/home_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
@@ -93,9 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                 await signInWithGoogle();
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
-                  final dataUser = await AuthApi().getUserByEmail(user.email);
-                  if (dataUser != null) {
-                    final data = UserByEmail.fromJson(dataUser);
+                  final dataUser = await AuthApi().getUserByEmail();
+                  if (dataUser.status == Status.success) {
+                    final data = UserByEmail.fromJson(dataUser.data!);
                     if (data.status == 1) {
                       Navigator.of(context).pushNamed(MainPage.route);
                     } else {

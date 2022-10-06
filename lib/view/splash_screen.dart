@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:edspert_finalproject/constants/r.dart';
-import 'package:edspert_finalproject/constants/repository/auth_api.dart';
+import 'package:edspert_finalproject/models/network_response.dart';
+import 'package:edspert_finalproject/repository/auth_api.dart';
+import 'package:edspert_finalproject/helpers/user_email.dart';
 import 'package:edspert_finalproject/models/user_by_email.dart';
+import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/view/login_page.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/home_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
@@ -17,18 +20,16 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 5), () async {
-      final user = FirebaseAuth.instance.currentUser;
+      final user = UserEmail.getUserEmail;
+
       if (user != null) {
-        final user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          final dataUser = await AuthApi().getUserByEmail(user.email);
-          if (dataUser != null) {
-            final data = UserByEmail.fromJson(dataUser);
-            if (data.status == 1) {
-              Navigator.of(context).pushNamed(MainPage.route);
-            } else {
-              Navigator.of(context).pushNamed(RegisterPage.route);
-            }
+        final dataUser = await AuthApi().getUserByEmail();
+        if (dataUser.status == Status.success) {
+          final data = UserByEmail.fromJson(dataUser.data!);
+          if (data.status == 1) {
+            Navigator.of(context).pushNamed(MainPage.route);
+          } else {
+            Navigator.of(context).pushNamed(RegisterPage.route);
           }
         }
       } else {
