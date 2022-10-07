@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (dataUser.status == Status.success) {
                     final data = UserByEmail.fromJson(dataUser.data!);
                     if (data.status == 1) {
-                      PreferenceHelper().setUserData(data.data!);
+                      await PreferenceHelper().setUserData(data.data!);
                       Navigator.of(context).pushNamed(MainPage.route);
                     } else {
                       Navigator.of(context).pushNamed(RegisterPage.route);
