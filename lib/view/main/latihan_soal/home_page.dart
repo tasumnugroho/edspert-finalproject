@@ -4,6 +4,7 @@ import 'package:edspert_finalproject/models/mappel_list.dart';
 import 'package:edspert_finalproject/models/network_response.dart';
 import 'package:edspert_finalproject/repository/latihan_soal_api.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/mapel_page.dart';
+import 'package:edspert_finalproject/view/main/latihan_soal/paket_soal_page.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -153,10 +154,20 @@ class _HomePageState extends State<HomePage> {
                   itemCount: list.data!.length > 3 ? 3 : list.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     final currentMapel = list.data![index];
-                    return MapelWidget(
-                      title: currentMapel.courseName!,
-                      totalPacket: currentMapel.jumlahMateri!,
-                      totalDone: currentMapel.jumlahDone!,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PaketSoalPage(id: currentMapel.courseId!),
+                          ),
+                        );
+                      },
+                      child: MapelWidget(
+                        title: currentMapel.courseName!,
+                        totalPacket: currentMapel.jumlahMateri!,
+                        totalDone: currentMapel.jumlahDone!,
+                      ),
                     );
                   },
                 )
