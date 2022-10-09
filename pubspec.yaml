@@ -32,12 +32,13 @@ dependencies:
   dio: ^4.0.6
   firebase_auth: ^3.11.0
   firebase_core: ^1.24.0
+  firebase_storage: ^10.3.11
   flutter:
     sdk: flutter
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.2
+  image_picker: ^0.8.6
   intl: ^0.17.0
-  # network: ^0.10.0+1
   shared_preferences: ^2.0.15
 
 dev_dependencies:

@@ -1,15 +1,21 @@
 import 'dart:ffi';
+// import 'dart:html';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edspert_finalproject/constants/r.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({Key? key, this.id}) : super(key: key);
+
+  final String? id;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -160,7 +166,42 @@ class _ChatPageState extends State<ChatPage> {
                                       Icons.camera_alt,
                                       color: Colors.blue,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      final imgResult = await ImagePicker()
+                                          .pickImage(
+                                              source: ImageSource.camera);
+
+                                      if (imgResult != null) {
+                                        File file = File(imgResult.path);
+                                        final name = imgResult.path.split("/");
+                                        String room = widget.id ?? "kimia";
+                                        String ref =
+                                            "chat/$room/${user.uid}/${imgResult.name}";
+                                        final imgResUpload =
+                                            await FirebaseStorage.instance
+                                                .ref()
+                                                .child(ref)
+                                                .putFile(file);
+
+                                        final url = await imgResUpload.ref
+                                            .getDownloadURL();
+
+                                        final chatContent = {
+                                          "nama": user.displayName,
+                                          "uid": user.uid,
+                                          "content": textController.text,
+                                          "email": user.email,
+                                          "ref": ref,
+                                          "type": "file",
+                                          "photo": user.photoURL,
+                                          "file_url": url,
+                                          "time": FieldValue.serverTimestamp()
+                                        };
+                                        chat.add(chatContent).whenComplete(() {
+                                          textController.clear();
+                                        });
+                                      }
+                                    },
                                   ),
                                   contentPadding: EdgeInsets.zero,
                                   border: OutlineInputBorder(
@@ -194,6 +235,9 @@ class _ChatPageState extends State<ChatPage> {
                         "content": textController.text,
                         "email": user.email,
                         "photo": user.photoURL,
+                        "ref": null,
+                        "type": "text",
+                        "file_url": null,
                         "file_url": "user.photoURL",
                         "time": FieldValue.serverTimestamp()
                       };
