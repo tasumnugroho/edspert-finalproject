@@ -14,15 +14,19 @@ class KerjakanLatihanSoalPage extends StatefulWidget {
       _KerjakanLatihanSoalPageState();
 }
 
-class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage> {
+class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
+    with SingleTickerProviderStateMixin {
   KerjakanSoalList? soalList;
   getQuestionList() async {
     final result = await LatihanSoalApi().postQuestionList(widget.id);
     if (result.status == Status.success) {
       soalList = KerjakanSoalList.fromJson(result.data!);
+      _controller = TabController(length: soalList!.data!.length, vsync: this);
       setState(() {});
     }
   }
+
+  TabController? _controller;
 
   @override
   void initState() {
@@ -38,7 +42,14 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage> {
         title: Text("Latihan Soal"),
       ),
       //tombol selanjutnya atau submit
-      bottomNavigationBar: Container(),
+      bottomNavigationBar: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(onPressed: () {}, child: Text("Selanjutnya"))
+          ],
+        ),
+      ),
       body: soalList == null
           ? Center(
               child: CircularProgressIndicator(),
@@ -46,9 +57,40 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage> {
           : Column(
               children: [
                 //TabBar no soal
-                Container(),
+                Container(
+                  child: TabBar(
+                    controller: _controller,
+                    tabs: List.generate(
+                      soalList!.data!.length,
+                      (index) => Text(
+                        '${index + 1}',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 //TabBarView soal dan pilihan jawaban
-                Expanded(child: Container())
+                Expanded(
+                    child: Container(
+                  child: TabBarView(
+                      controller: _controller,
+                      children: List.generate(
+                        soalList!.data!.length,
+                        (index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Soal no ${index + 1}"),
+                            if (soalList!.data![index].questionTitle != null)
+                              Text(soalList!.data![index].questionTitle!),
+                            if (soalList!.data![index].questionTitleImg != null)
+                              Image.network(
+                                  soalList!.data![index].questionTitleImg!),
+                          ],
+                        ),
+                      ).toList()),
+                ))
               ],
             ),
     );
