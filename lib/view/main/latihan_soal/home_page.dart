@@ -5,6 +5,7 @@ import 'package:edspert_finalproject/models/network_response.dart';
 import 'package:edspert_finalproject/repository/latihan_soal_api.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/mapel_page.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/paket_soal_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -36,12 +37,41 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  setupFcm() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    final tokenFcm = await FirebaseMessaging.instance.getToken();
+    print("tokenfcm: $tokenFcm");
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    //  If the message also contains a data property with a "type" of "chat",
+    //  navigate to a chat screen
+    // if (initialMessage != null) {
+    //   _handleMessage(initialMessage);
+    // }
+
+    //  Also handle any interaction when the app is in the background via a
+    //  Stream listener
+    // FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getMapel();
     getBanner();
+    setupFcm();
   }
 
   @override
