@@ -6,4 +6,5 @@ class Strings {
   String login = "Login";
   String welcome = "Selamat Datang";
   String daftar = "DAFTAR";
+  String perbaharuiAkun = "Perbaharui Akun";
 }

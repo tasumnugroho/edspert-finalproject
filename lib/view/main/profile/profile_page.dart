@@ -2,6 +2,7 @@ import 'package:edspert_finalproject/constants/r.dart';
 import 'package:edspert_finalproject/helpers/preference_helper.dart';
 import 'package:edspert_finalproject/models/user_by_email.dart';
 import 'package:edspert_finalproject/view/login_page.dart';
+import 'package:edspert_finalproject/view/main/profile/edit_profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -39,12 +40,24 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: () async {},
+            onPressed: () async {
+              final result = await Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return EditProfilePage();
+              }));
+              print("result");
+              print(result);
+              if (result == true) {
+                getUserData();
+              }
+            },
             child: Text(
               "Edit",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
-          ),
+          )
         ],
       ),
       body: user == null
