@@ -99,8 +99,8 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) {
                               return ResultPage(
-                                  // exerciseId: widget.id,
-                                  );
+                                exerciseId: widget.id,
+                              );
                             }));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
