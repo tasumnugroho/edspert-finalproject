@@ -51,8 +51,6 @@ class AuthApi {
   }
 
   Future<NetworkResponse> getUserByEmail() async {
-    // final String emailXX = "gatotcoba@gmail.com";
-
     final result = await _getRequest(
       endpoint: ApiUrl.users,
       param: {"email": UserEmail.getUserEmail()},

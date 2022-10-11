@@ -7,19 +7,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PreferenceHelper {
   static String userData = "data_user";
 
-  Future<SharedPreferences> sharPref() async {
+  Future<SharedPreferences> sharePref() async {
     final sharePref = await SharedPreferences.getInstance();
     return sharePref;
   }
 
   Future _saveString(key, data) async {
-    final _pref = await sharPref();
+    final _pref = await sharePref();
     await _pref.setString(key, data);
   }
 
-  Future _getString(key) async {
-    final _pref = await sharPref();
-    await _pref.getString(key);
+  Future<String?> _getString(key) async {
+    final _pref = await sharePref();
+    return _pref.getString(
+      key,
+    );
   }
 
   setUserData(UserData userDataModel) async {
@@ -30,7 +32,7 @@ class PreferenceHelper {
 
   Future<UserData?> getUserData() async {
     final user = await _getString(userData);
-    final jsonUserData = jsonDecode(user);
+    final jsonUserData = jsonDecode(user!);
     final UserDataModal = UserData.fromJson(jsonUserData);
     return UserDataModal;
   }

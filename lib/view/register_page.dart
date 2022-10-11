@@ -37,8 +37,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   initDataUser() {
-    emailController.text = UserEmail.getUserEmail()!;
-    fullNameController.text = UserEmail.getUserDisplayName()!;
+    emailController.text = UserEmail.getUserEmail() ?? "Noemail@mail.com";
+    fullNameController.text = UserEmail.getUserDisplayName() ?? "Noel";
     setState(() {});
   }
 
