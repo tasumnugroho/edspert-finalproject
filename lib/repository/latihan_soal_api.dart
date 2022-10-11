@@ -100,4 +100,10 @@ class LatihanSoalApi {
     );
     return result;
   }
+
+  Future<NetworkResponse> postStudentAnswer(payload) async {
+    final result = await _postRequest(
+        endpoint: ApiUrl.latihanSubmitJawaban, body: payload);
+    return result;
+  }
 }
