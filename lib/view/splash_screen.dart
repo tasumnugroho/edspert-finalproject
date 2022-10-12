@@ -29,8 +29,6 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 5), () async {
       final user = UserEmail.getUserEmail();
 
-      // print("user : $user");
-
       if (user != null) {
         final dataUser = await AuthApi().getUserByEmail();
         if (dataUser.status == Status.success) {
