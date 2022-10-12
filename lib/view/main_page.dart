@@ -26,15 +26,15 @@ class _MainPageState extends State<MainPage> {
         ),
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ChatPage()));
+              .push(MaterialPageRoute(builder: (context) => const ChatPage()));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNavigation(),
       body: PageView(
         controller: _pc,
-        physics: NeverScrollableScrollPhysics(),
-        children: [
+        physics: const NeverScrollableScrollPhysics(),
+        children: const [
           HomePage(),
           ProfilePage(),
         ],
@@ -47,7 +47,7 @@ class _MainPageState extends State<MainPage> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-              offset: Offset(0, 4),
+              offset: const Offset(0, 4),
               blurRadius: 20,
               color: Colors.black.withOpacity(0.06)),
         ],
@@ -67,7 +67,7 @@ class _MainPageState extends State<MainPage> {
                         index = 0;
                         _pc.animateToPage(
                           index,
-                          duration: Duration(microseconds: 500),
+                          duration: const Duration(microseconds: 500),
                           curve: Curves.bounceInOut,
                         );
                         setState(() {});
@@ -79,7 +79,7 @@ class _MainPageState extends State<MainPage> {
                             height: 20,
                             color: index == 0 ? null : Colors.grey,
                           ),
-                          Text("Home"),
+                          const Text("Home"),
                         ],
                       ),
                     ),
@@ -100,7 +100,7 @@ class _MainPageState extends State<MainPage> {
                               height: 20,
                             ),
                           ),
-                          Text("Diskusi"),
+                          const Text("Diskusi"),
                         ],
                       ),
                     ),
@@ -116,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                         index = 1;
                         _pc.animateToPage(
                           index,
-                          duration: Duration(microseconds: 500),
+                          duration: const Duration(microseconds: 500),
                           curve: Curves.easeInOut,
                         );
                         setState(() {});
@@ -129,7 +129,7 @@ class _MainPageState extends State<MainPage> {
                             color: index == 1 ? null : Colors.grey,
                           ),
                           // Icon(Icons.person),
-                          Text("Profile"),
+                          const Text("Profile"),
                         ],
                       ),
                     ),

@@ -1,7 +1,5 @@
 import 'package:edspert_finalproject/constants/r.dart';
 import 'package:edspert_finalproject/view/login_page.dart';
-import 'package:edspert_finalproject/view/main/latihan_soal/mapel_page.dart';
-import 'package:edspert_finalproject/view/main/latihan_soal/paket_soal_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:edspert_finalproject/view/splash_screen.dart';

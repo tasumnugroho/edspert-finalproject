@@ -8,8 +8,6 @@ import 'package:edspert_finalproject/repository/latihan_soal_api.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/mapel_page.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/paket_soal_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -97,24 +95,24 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: Text(
+                    child: const Text(
                       "Terbaru",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   bannerList == null
                       ? Container(
                           height: 70,
                           width: double.infinity,
-                          child: Center(
+                          child: const Center(
                             child: CircularProgressIndicator(),
                           ),
                         )
@@ -136,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                             }),
                           ),
                         ),
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
                 ],
               ),
             ),
@@ -148,19 +146,19 @@ class _HomePageState extends State<HomePage> {
 
   Container _buildHomeListMapel(MappelList? list) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 21),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 21),
       child: Column(
         children: [
           Row(
             children: [
-              Text(
+              const Text(
                 "Pilih Pelajaran",
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               TextButton(
                 onPressed: () {
                   Navigator.of(context)
@@ -183,13 +181,13 @@ class _HomePageState extends State<HomePage> {
               ? Container(
                   height: 70,
                   width: double.infinity,
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                  child: const Center(
+                    child: const CircularProgressIndicator(),
                   ),
                 )
               : ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: list.data!.length > 3 ? 3 : list.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     final currentMapel = list.data![index];
@@ -235,7 +233,7 @@ class _HomePageState extends State<HomePage> {
               horizontal: 20.0,
               vertical: 15,
             ),
-            child: Text(
+            child: const Text(
               "Mau kerjain latihan soal apa hari ini?",
               style: TextStyle(
                 fontSize: 18,
@@ -316,28 +314,28 @@ class MapelWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 21),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 21),
       child: Row(
         children: [
           Container(
             height: 53,
             width: 53,
-            padding: EdgeInsets.all(13),
+            padding: const EdgeInsets.all(13),
             decoration: BoxDecoration(
               color: R.colors.grey,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Image.asset(R.assets.icAtom),
           ),
-          SizedBox(width: 6),
+          const SizedBox(width: 6),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -349,7 +347,7 @@ class MapelWidget extends StatelessWidget {
                       fontSize: 12,
                       color: R.colors.greySubtitleHome),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Stack(
                   children: [
                     Container(

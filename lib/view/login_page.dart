@@ -5,8 +5,6 @@ import 'package:edspert_finalproject/helpers/preference_helper.dart';
 import 'package:edspert_finalproject/models/network_response.dart';
 import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/models/user_by_email.dart';
-import 'package:edspert_finalproject/repository/auth_api.dart';
-import 'package:edspert_finalproject/view/main/latihan_soal/home_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff3f7f8),
+      backgroundColor: const Color(0xfff3f7f8),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
@@ -71,12 +69,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Image.asset(R.assets.imgLogin),
-            SizedBox(height: 35),
+            const SizedBox(height: 35),
             Text(
               R.strings.welcome,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
@@ -90,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: R.colors.greySubtitle,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             ButtonLogin(
               onTap: () async {
                 await signInWithGoogle();
@@ -108,8 +106,8 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Gagal Login"),
+                    const SnackBar(
+                      content: const Text("Gagal Login"),
                       duration: Duration(seconds: 2),
                     ),
                   );
@@ -121,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(R.assets.icGoogle),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                   Text(
                     R.strings.loginWithGoogle,
                     style: TextStyle(
@@ -142,10 +140,10 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(R.assets.icApple),
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Text(
                       R.strings.loginWithApple,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: Colors.white,

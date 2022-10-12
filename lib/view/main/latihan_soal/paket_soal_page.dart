@@ -34,22 +34,22 @@ class _PaketSoalPageState extends State<PaketSoalPage> {
     return Scaffold(
       backgroundColor: R.colors.grey,
       appBar: AppBar(
-        title: Text("Paket Soal"),
+        title: const Text("Paket Soal"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Pilih Paket Soal",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             Expanded(
                 child: paketSoalList == null
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(),
                       )
                     : SingleChildScrollView(
@@ -58,7 +58,7 @@ class _PaketSoalPageState extends State<PaketSoalPage> {
                                 (index) {
                           final currentPaketSoal = paketSoalList!.data![index];
                           return Container(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: PaketSoalWidget(data: currentPaketSoal),
                           );
@@ -120,16 +120,16 @@ class PaketSoalWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.blue.withOpacity(0.2),
               ),
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: Image.asset(
                 R.assets.icNote,
                 width: 14,
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               data.exerciseTitle!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:edspert_finalproject/constants/R/api_url.dart';
 import 'package:edspert_finalproject/helpers/user_email.dart';
-import 'package:edspert_finalproject/models/latihan_soal_skor.dart';
 import 'package:edspert_finalproject/models/network_response.dart';
 
 class LatihanSoalApi {

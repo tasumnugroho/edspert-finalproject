@@ -4,14 +4,10 @@ import 'package:edspert_finalproject/models/network_response.dart';
 import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/helpers/user_email.dart';
 import 'package:edspert_finalproject/models/user_by_email.dart';
-import 'package:edspert_finalproject/repository/auth_api.dart';
 import 'package:edspert_finalproject/view/login_page.dart';
-import 'package:edspert_finalproject/view/main/latihan_soal/home_page.dart';
 import 'package:edspert_finalproject/view/main_page.dart';
 import 'package:edspert_finalproject/view/register_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

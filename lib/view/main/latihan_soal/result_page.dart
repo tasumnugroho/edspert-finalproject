@@ -38,7 +38,7 @@ class _ResultPageState extends State<ResultPage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: resultData == null
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: const CircularProgressIndicator())
               : Column(
                   children: [
                     Row(
@@ -48,12 +48,12 @@ class _ResultPageState extends State<ResultPage> {
                             Navigator.pop(context);
                             Navigator.pop(context);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.close,
                             color: Colors.white,
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Tutup",
                           style: TextStyle(
                             color: Colors.white,
@@ -61,36 +61,36 @@ class _ResultPageState extends State<ResultPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 50),
-                    Text(
+                    const SizedBox(height: 50),
+                    const Text(
                       "Selamat",
                       style: TextStyle(color: Colors.white, fontSize: 24),
                     ),
-                    Text(
+                    const Text(
                       "Kamu telah menyelesaikan Kuiz ini",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 34,
                     ),
                     Image.asset(
                       R.assets.imgResult,
                       width: MediaQuery.of(context).size.width * 0.5,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 35,
                     ),
-                    Text(
+                    const Text(
                       "Nilai kamu:",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
                     Text(
                       resultData!.data!.result!.jumlahScore!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 96,
                       ),

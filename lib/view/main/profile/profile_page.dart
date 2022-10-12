@@ -36,14 +36,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Akun Saya"),
+        title: const Text("Akun Saya"),
         centerTitle: true,
         actions: [
           TextButton(
             onPressed: () async {
               final result = await Navigator.of(context)
                   .push(MaterialPageRoute(builder: (BuildContext context) {
-                return EditProfilePage();
+                return const EditProfilePage();
               }));
               print("result");
               print(result);
@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 getUserData();
               }
             },
-            child: Text(
+            child: const Text(
               "Edit",
               style: TextStyle(
                 color: Colors.white,
@@ -61,11 +61,11 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       body: user == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: const CircularProgressIndicator())
           : Column(
               children: [
                 Container(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: 28,
                     bottom: 60,
                     right: 15,
@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   decoration: BoxDecoration(
                     color: R.colors.primary,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(9),
                       bottomRight: Radius.circular(9),
                     ),
@@ -86,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             Text(
                               user!.userName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400,
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             Text(
                               user!.userAsalSekolah!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400,
@@ -124,13 +124,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ],
                   ),
-                  margin: EdgeInsets.symmetric(vertical: 18, horizontal: 13),
-                  padding: EdgeInsets.symmetric(vertical: 18, horizontal: 13),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 18, horizontal: 13),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 18, horizontal: 13),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Identitas diri"),
-                      SizedBox(height: 15),
+                      const Text("Identitas diri"),
+                      const SizedBox(height: 15),
                       Text(
                         "Nama Lengkap",
                         style: TextStyle(
@@ -140,12 +142,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         user!.userName!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
                         "Email",
                         style: TextStyle(
@@ -155,12 +157,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         user!.userEmail!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
                         "Jenis Kelamin",
                         style: TextStyle(
@@ -170,12 +172,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         user!.userGender!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
                         "Kelas",
                         style: TextStyle(
@@ -185,12 +187,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         user?.jenjang ?? "Not Set",
-                        style: TextStyle(
+                        style: const TextStyle(
                           // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Text(
                         "Asal Sekolah",
                         style: TextStyle(
@@ -200,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         user!.userAsalSekolah!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
@@ -223,8 +225,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         LoginPage.route, (route) => false);
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 13),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    margin: const EdgeInsets.symmetric(horizontal: 13),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
@@ -236,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(
                           Icons.exit_to_app,
                           color: Colors.red,

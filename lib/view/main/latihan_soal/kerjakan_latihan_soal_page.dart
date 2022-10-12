@@ -4,8 +4,6 @@ import 'package:edspert_finalproject/models/kerjakan_soal_list.dart';
 import 'package:edspert_finalproject/models/network_response.dart';
 import 'package:edspert_finalproject/repository/latihan_soal_api.dart';
 import 'package:edspert_finalproject/view/main/latihan_soal/result_page.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -46,11 +44,11 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Latihan Soal"),
+        title: const Text("Latihan Soal"),
       ),
       //tombol selanjutnya atau submit
       bottomNavigationBar: _controller == null
-          ? SizedBox(
+          ? const SizedBox(
               height: 0,
             )
           : Container(
@@ -60,7 +58,7 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: R.colors.primary,
-                      fixedSize: Size(153, 33),
+                      fixedSize: const Size(153, 33),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -72,7 +70,7 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                             isScrollControlled: true,
                             backgroundColor: Colors.transparent,
                             builder: (context) {
-                              return ButtomsheetConfirmation();
+                              return const ButtomsheetConfirmation();
                             });
                         print(result);
                         if (result == true) {
@@ -103,9 +101,10 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                               );
                             }));
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content:
-                                    Text("Submit gagal. silahkan ulangi")));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: const Text(
+                                        "Submit gagal. silahkan ulangi")));
                           }
                         }
                       } else {
@@ -116,14 +115,14 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                       _controller?.index == soalList!.data!.length - 1
                           ? "Kumpulin"
                           : "Selanjutnya",
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   )
                 ],
               ),
             ),
       body: soalList == null
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Column(
@@ -136,7 +135,7 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                       soalList!.data!.length,
                       (index) => Text(
                         '${index + 1}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                         ),
                       ),
@@ -146,7 +145,7 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                 //TabBarView soal dan pilihan jawaban
                 Expanded(
                     child: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: TabBarView(
                       controller: _controller,
                       children: List.generate(
@@ -170,7 +169,7 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
                                       padding: EdgeInsets.zero,
                                     ),
                                     "p": Style(
-                                      fontSize: FontSize(12),
+                                      fontSize: const FontSize(12),
                                     )
                                   },
                                 ),
@@ -231,10 +230,10 @@ class _KerjakanLatihanSoalPageState extends State<KerjakanLatihanSoalPage>
         setState(() {});
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           vertical: 2,
         ),
         decoration: BoxDecoration(
@@ -287,7 +286,7 @@ class _ButtomsheetConfirmationState extends State<ButtomsheetConfirmation> {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: new BoxDecoration(
           color: Colors.white,
           borderRadius: new BorderRadius.only(
@@ -304,11 +303,11 @@ class _ButtomsheetConfirmationState extends State<ButtomsheetConfirmation> {
               color: R.colors.greySubtitle,
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Image.asset(R.assets.icConfirmatio),
-          SizedBox(height: 15),
-          Text("Kumpulkan latihan soal sekarang?"),
-          Text("Boleh langsung kumpulin dong"),
+          const SizedBox(height: 15),
+          const Text("Kumpulkan latihan soal sekarang?"),
+          const Text("Boleh langsung kumpulin dong"),
           Row(
             children: [
               Expanded(
@@ -316,14 +315,14 @@ class _ButtomsheetConfirmationState extends State<ButtomsheetConfirmation> {
                       onPressed: () {
                         Navigator.of(context).pop(false);
                       },
-                      child: Text("Nanti Dulu"))),
-              SizedBox(width: 15),
+                      child: const Text("Nanti Dulu"))),
+              const SizedBox(width: 15),
               Expanded(
                   child: ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop(true);
                       },
-                      child: Text("Ya"))),
+                      child: const Text("Ya"))),
             ],
           )
         ]),

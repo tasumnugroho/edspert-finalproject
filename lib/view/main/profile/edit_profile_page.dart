@@ -69,8 +69,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         elevation: 0,
         // backgroundColor: Colors.white,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
           "Edit Akun",
           style: TextStyle(
             color: Colors.white,
@@ -110,8 +110,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Terjadi kesalahan, silahkan ulangi kembali"),
+                  const SnackBar(
+                    content: const Text(
+                        "Terjadi kesalahan, silahkan ulangi kembali"),
                   ),
                 );
               }
@@ -120,7 +121,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             borderColor: R.colors.primary,
             child: Text(
               R.strings.perbaharuiAkun,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -141,13 +142,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 hintText: 'Email Anda',
                 enabled: false,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               EditProfileTextField(
                 title: 'Nama Lengkap',
                 hintText: 'Nama Lengkap Anda',
                 controller: fullNameController,
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
                 "Jenis Kelamin",
                 style: TextStyle(
@@ -156,7 +157,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   color: R.colors.greySubtitle,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   Expanded(
@@ -187,7 +188,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             color: gender.toLowerCase() ==
                                     "Laki-laki".toLowerCase()
                                 ? Colors.white
-                                : Color(0xff282828),
+                                : const Color(0xff282828),
                           ),
                         ),
                       ),
@@ -219,7 +220,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             fontSize: 14,
                             color: gender == "Perempuan"
                                 ? Colors.white
-                                : Color(0xff282828),
+                                : const Color(0xff282828),
                           ),
                         ),
                       ),
@@ -227,7 +228,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
                 "Kelas",
                 style: TextStyle(
@@ -236,10 +237,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   color: R.colors.greySubtitle,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
@@ -265,7 +266,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               EditProfileTextField(
                 title: 'Nama Sekolah',
                 hintText: 'Nama Sekolah',
@@ -309,7 +310,7 @@ class EditProfileTextField extends StatelessWidget {
               color: R.colors.greySubtitle,
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           TextField(
             enabled: enabled,
             controller: controller,
