@@ -162,9 +162,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
-                          primary: gender == "Laki-laki"
-                              ? R.colors.primary
-                              : Colors.white,
+                          primary:
+                              gender.toLowerCase() == "Laki-laki".toLowerCase()
+                                  ? R.colors.primary
+                                  : Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                             side: BorderSide(
@@ -180,7 +181,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           "Laki-laki",
                           style: TextStyle(
                             fontSize: 14,
-                            color: gender == "Laki-laki"
+                            color: gender.toLowerCase() ==
+                                    "Laki-laki".toLowerCase()
                                 ? Colors.white
                                 : Color(0xff282828),
                           ),
