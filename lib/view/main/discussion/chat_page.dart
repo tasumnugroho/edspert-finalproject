@@ -2,6 +2,7 @@ import 'dart:ffi';
 // import 'dart:html';
 import 'dart:io';
 
+import 'package:clipboard/clipboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edspert_finalproject/constants/r.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -66,7 +67,7 @@ class _ChatPageState extends State<ChatPage> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
                   if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   }
                   return ListView.builder(
                     itemCount: snapshot.data!.docs.reversed.length,
@@ -91,35 +92,72 @@ class _ChatPageState extends State<ChatPage> {
                                 color: Color(0xff5200ff),
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                  color: user.uid == currentChat["uid"]
-                                      ? Colors.green.withOpacity(0.5)
-                                      : Color(0xffffdcdc),
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(10),
-                                    bottomRight: user.uid == currentChat["uid"]
-                                        ? Radius.circular(0)
-                                        : Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                    topLeft: user.uid != currentChat["uid"]
-                                        ? Radius.circular(0)
-                                        : Radius.circular(10),
-                                  )),
-                              child: currentChat["type"] == "file"
-                                  ? Image.network(
-                                      currentChat["file_url"],
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Container(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(Icons.warning),
-                                        );
-                                      },
-                                    )
-                                  : Text(currentChat["content"]),
+                            GestureDetector(
+                              onLongPress: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Container(
+                                            child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ListTile(
+                                              title: Text("Salin"),
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                                FlutterClipboard.copy(
+                                                        currentChat["content"])
+                                                    .then((value) => ScaffoldMessenger
+                                                            .of(context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Text telah disalin"))));
+                                              },
+                                            ),
+                                            if (user.uid == currentChat["uid"])
+                                              ListTile(
+                                                title: Text("Hapus"),
+                                                onTap: () {
+                                                  String id = currentChat.id;
+                                                  print(id);
+                                                  chat.doc(id).update({
+                                                    "is_deleted": true
+                                                  }).then((value) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Text telah dihapus")));
+                                                    Navigator.pop(context);
+                                                  });
+                                                },
+                                              )
+                                          ],
+                                        )),
+                                      );
+                                    });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                    color: user.uid == currentChat["uid"]
+                                        ? Colors.green.withOpacity(0.5)
+                                        : Color(0xffffdcdc),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight:
+                                          user.uid == currentChat["uid"]
+                                              ? Radius.circular(0)
+                                              : Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                      topLeft: user.uid != currentChat["uid"]
+                                          ? Radius.circular(0)
+                                          : Radius.circular(10),
+                                    )),
+                                child: baloonChat(currentChat),
+                              ),
                             ),
                             Text(
                               currentDate == null
@@ -209,7 +247,8 @@ class _ChatPageState extends State<ChatPage> {
                                           "type": "file",
                                           "photo": user.photoURL,
                                           "file_url": url,
-                                          "time": FieldValue.serverTimestamp()
+                                          "time": FieldValue.serverTimestamp(),
+                                          "is_deleted": false
                                         };
                                         chat.add(chatContent).whenComplete(() {
                                           textController.clear();
@@ -252,7 +291,8 @@ class _ChatPageState extends State<ChatPage> {
                         "ref": null,
                         "type": "text",
                         "file_url": null,
-                        "time": FieldValue.serverTimestamp()
+                        "time": FieldValue.serverTimestamp(),
+                        "is_deleted": false
                       };
                       chat.add(chatContent).whenComplete(() {
                         textController.clear();
@@ -266,5 +306,31 @@ class _ChatPageState extends State<ChatPage> {
         ],
       ),
     );
+  }
+
+  Widget baloonChat(QueryDocumentSnapshot currentChat) {
+    if (currentChat["is_deleted"] == true) {
+      return const Text(
+        "Pesan telah dihapus",
+        style: TextStyle(
+          color: Colors.grey,
+          fontStyle: FontStyle.italic,
+        ),
+      );
+    }
+
+    return currentChat["type"] == "file"
+        ? Image.network(
+            currentChat["file_url"],
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                padding: EdgeInsets.all(10),
+                child: Icon(Icons.warning),
+              );
+            },
+          )
+        : Text(
+            currentChat["content"],
+          );
   }
 }

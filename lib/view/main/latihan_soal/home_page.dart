@@ -306,8 +306,8 @@ class MapelWidget extends StatelessWidget {
   }) : super(key: key);
 
   final String title;
-  final int totalDone;
-  final int totalPacket;
+  final int? totalDone;
+  final int? totalPacket;
 
   @override
   Widget build(BuildContext context) {
@@ -360,13 +360,31 @@ class MapelWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    Container(
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      decoration: BoxDecoration(
-                        color: R.colors.primary,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: totalDone!,
+                          child: Container(
+                            height: 5,
+                            // width: MediaQuery.of(context).size.width * 0.4,
+                            decoration: BoxDecoration(
+                              color: R.colors.primary,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: totalPacket! - totalDone!,
+                          child: Container(
+                              // height: 5,
+                              // width: MediaQuery.of(context).size.width * 0.4,
+                              // decoration: BoxDecoration(
+                              //   color: R.colors.primary,
+                              //   borderRadius: BorderRadius.circular(10),
+                              // ),
+                              ),
+                        ),
+                      ],
                     ),
                   ],
                 )

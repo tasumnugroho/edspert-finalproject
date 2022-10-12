@@ -133,26 +133,27 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            ButtonLogin(
-              onTap: () {},
-              backgroundColor: Colors.black,
-              borderColor: Colors.black,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(R.assets.icApple),
-                  SizedBox(width: 15),
-                  Text(
-                    R.strings.loginWithApple,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+            if (Platform.isIOS)
+              ButtonLogin(
+                onTap: () {},
+                backgroundColor: Colors.black,
+                borderColor: Colors.black,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(R.assets.icApple),
+                    SizedBox(width: 15),
+                    Text(
+                      R.strings.loginWithApple,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
+                  ],
+                ),
+              )
           ],
         ),
       ),
